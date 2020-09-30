@@ -1,5 +1,5 @@
 const { Order, CartItem } = require("../models/order");
-const { errorHandler } = require("../helpers/dbErrorHandler");
+const { errorHandler } = require("../Helpers/dbErrorHandler");
 // // sendgrid for email npm i @sendgrid/mail
 // const sgMail = require('@sendgrid/mail');
 // sgMail.setApiKey('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');
@@ -10,7 +10,7 @@ exports.orderById = (req, res, next, id) => {
     .exec((err, order) => {
       if (err || !order) {
         return res.status(400).json({
-          error: errorHandler(err)
+          error: errorHandler(err),
         });
       }
       req.order = order;
@@ -25,7 +25,7 @@ exports.create = (req, res) => {
   order.save((error, data) => {
     if (error) {
       return res.status(400).json({
-        error: errorHandler(error)
+        error: errorHandler(error),
       });
     }
     //         // send email alert to admin
@@ -55,7 +55,7 @@ exports.listOrders = (req, res) => {
     .exec((err, orders) => {
       if (err) {
         return res.status(400).json({
-          error: errorHandler(error)
+          error: errorHandler(error),
         });
       }
       res.json(orders);
@@ -75,7 +75,7 @@ exports.updateOrderStatus = (req, res) => {
       if (err) {
         console.log(err);
         return res.status(400).json({
-          error: errorHandler(err)
+          error: errorHandler(err),
         });
       }
 
